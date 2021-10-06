@@ -1,4 +1,3 @@
-# 122
 <html>
   <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -7,12 +6,16 @@
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
+
+        let url='https://api.thingspeak.com/channels/1527802/feeds.json?api_key=YJNIR6VZLRL9XWXJ&results=20';
+
+        
         var data = google.visualization.arrayToDataTable([
-          ['Mittausaika', 'Ilmankosteus'],
-          ['12.13',  23,  23],
-          ['12.14',  24,  23],
-          ['12.15',  24,  23],
-          ['12.16',  25,  23]
+          ['Mittausaika', 'Lämpötila'],
+          ['12.13',  23],
+          ['12.14',  24],
+          ['12.15',  24],
+          ['12.16',  25]
         ]);
 
         var options = {
@@ -22,28 +25,33 @@
         };
 
         
-        var data = google.visualization.arrayToDataTable([
+        var data2 = google.visualization.arrayToDataTable([
           ['Mittausaika', 'Ilmankosteus'],
-          ['2014', 1000, 400, 200],
-          ['2015', 1170, 460, 250],
-          ['2016', 660, 1120, 300],
-          ['2017', 1030, 540, 350]
+          ['2014', 1000],
+          ['2015', 1170],
+          ['2016', 660],
+          ['2017', 1030]
         ]);
 
-        var options = {
+        var options2 = {
           chart: {
             title: 'Mittausaika',
-            subtitle: 'Ilmankoseteus',
+            subtitle: 'Ilmankosteus',
           }
         };
 
-        var chart2 = new google.charts.Bar(document.getElementById('columnchart_material'));
+        var chart = new google.visualization.LineChart(document.getElementById('linechart_material'));
 
-        chart.draw(data, google.charts.Bar.convertOptions(options));
+        chart.draw(data, options);
+
+        var chart2 = new google.visualization.ColumnChart(document.getElementById('columnchart_material'));
+
+        chart2.draw(data2, options2);
       }
     </script>
   </head>
   <body>
+    <div id="linechart_material" style="width: 800px; height: 500px;"></div>
     <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
   </body>
 </html>
