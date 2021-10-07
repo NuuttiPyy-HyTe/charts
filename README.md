@@ -7,6 +7,7 @@
     google.charts.setOnLoadCallback(drawChart);
 
     async function drawChart() {
+      console.log('Päivittyi');
 
       let url = 'https://api.thingspeak.com/channels/1527802/feeds.json?api_key=YJNIR6VZLRL9XWXJ&results=20';
 
@@ -14,10 +15,10 @@
       const jsonResult = await fetchResults.json();
       const feedsResults = jsonResult.feeds;
 
-      let editRows = '';
+      let editRows =  [['Mittausaika', 'Lämpötila']];
 
       for (const i in feedsResults) {
-        editRows.push([feedsResults[i].created_at, parseInt(feedsResults[i].field1.split('.')[0])]);                                           //+= " " + feedsResults[i].field1.split('.')[0];
+      editRows.push([feedsResults[i].created_at, parseInt(feedsResults[i].field1.split('.')[0])]);                                       //+= " " + feedsResults[i].field1.split('.')[0];
       }
 
       document.getElementById("resultTable").innerHTML = editRows;
@@ -53,14 +54,15 @@
       var chart2 = new google.visualization.ColumnChart(document.getElementById('columnchart_material'));
 
       chart2.draw(data2, options2);
+      setTimeout(function(){ drawChart() }, 3000);
     }
   </script>
 </head>
-
 <body>
   <div id="resultTable"></div>
   <div id="linechart_material" style="width: 800px; height: 500px;"></div>
   <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+
 </body>
 
 </html>
